@@ -12,7 +12,7 @@ let router = Router()
 router.get("/") { _, response, next in
      response.headers["Content-Type"] = "text/html; charset=utf-8"
      try response.send(fileName: "views/header.mustache")
-     try response.send(fileName: "views/index.mustache")
+     try response.send(IndexHander().generateContent())
      try response.send(fileName: "views/footer.mustache").end()
 }
 
