@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 
-struct IndexHander {
+struct IndexHandler {
 
     func generateContent() -> String {
 
