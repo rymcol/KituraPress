@@ -1,5 +1,3 @@
-
-
 struct ContentGenerator {
 
     func generate() -> [String: Any] {

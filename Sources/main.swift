@@ -1,11 +1,5 @@
 import Kitura
 
-#if os(Linux)
-    import Glibc
-#else
-    import Darwin
-#endif
-
 // All Web apps need a router to define routes
 let router = Router()
 
@@ -19,7 +13,7 @@ router.get("/") { _, response, next in
 router.get("/blog") { _, response, next in
      response.headers["Content-Type"] = "text/html; charset=utf-8"
      try response.send(fileName: "views/header.mustache")
-     try response.send(BlogHandler().generateContent())
+     try response.send(BlogHandler().loadPageContent())
      try response.send(fileName: "views/footer.mustache").end()
 }
 

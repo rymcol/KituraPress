@@ -4,7 +4,6 @@ import Glibc
 import Darwin
 #endif
 
-
 struct IndexHandler {
 
     func generateContent() -> String {
