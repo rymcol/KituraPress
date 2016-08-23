@@ -1,4 +1,11 @@
 import Kitura
+import SwiftyJSON
+
+#if os(Linux)
+public func arc4random_uniform(_ max: UInt32) -> Int {
+    return Int(random() % Int(max + 1))
+}
+#endif
 
 // All Web apps need a router to define routes
 let router = Router()
@@ -6,15 +13,21 @@ let router = Router()
 router.get("/") { _, response, next in
      response.headers["Content-Type"] = "text/html; charset=utf-8"
      try response.send(fileName: "views/header.mustache")
-     try response.send(IndexHandler().generateContent())
+     response.send(IndexHandler().generateContent())
      try response.send(fileName: "views/footer.mustache").end()
 }
 
 router.get("/blog") { _, response, next in
      response.headers["Content-Type"] = "text/html; charset=utf-8"
      try response.send(fileName: "views/header.mustache")
-     try response.send(BlogHandler().loadPageContent())
+     response.send(BlogHandler().loadPageContent())
      try response.send(fileName: "views/footer.mustache").end()
+}
+
+router.get("/json") { _, response, next in
+     response.headers["Content-Type"] = "text/json; charset=utf-8"
+     let json = JSON(JSONCreator().generateJSON())
+     try response.send(json: json).end()
 }
 
 router.get(middleware: StaticFileServer(path: "./public"))
