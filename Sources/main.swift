@@ -25,7 +25,7 @@ router.get("/blog") { _, response, next in
 }
 
 router.get("/json") { _, response, next in
-     response.headers["Content-Type"] = "text/json; charset=utf-8"
+     response.headers["Content-Type"] = "application/json; charset=utf-8"
      let json = JSON(JSONCreator().generateJSON())
      try response.send(json: json).end()
 }
